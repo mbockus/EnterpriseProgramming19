@@ -1,0 +1,2 @@
+cd AzureExample\AzureExample
+dotnet run
