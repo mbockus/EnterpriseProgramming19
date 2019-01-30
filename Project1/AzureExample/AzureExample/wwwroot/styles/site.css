@@ -1,0 +1,30 @@
+﻿.importantText {
+    color: red; 
+    background-color: yellow;
+    padding: 50px;
+    z-index: 100;
+}
+
+.importantText, .superImportantText {
+    }
+
+.uselessText {
+    color: purple;
+}
+
+#siteTitle {
+    font-size: 10em;
+    color: teal;
+}
+
+table {
+    color: violet;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+
+body {
+    background-color: orange;
+} 
