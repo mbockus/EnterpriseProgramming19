@@ -27,4 +27,13 @@ table {
 
 body {
     background-color: orange;
-} 
+}
+
+.faqContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.faqQuestion:nth-child(odd) {
+    background-color: purple;
+}
