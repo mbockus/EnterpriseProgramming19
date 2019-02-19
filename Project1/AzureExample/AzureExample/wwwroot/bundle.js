@@ -262,7 +262,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var boot
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("﻿(function () {\r\n    console.log('Script was executed.');\r\n})();\n\n//# sourceURL=webpack:///./src/scripts/junk.js?");
+eval("﻿(function () {\r\n    console.log('Started iife execution.');\r\n    var serverTextDiv = document.getElementById('serverText');\r\n    serverTextDiv.innerText = 'Loading...';\r\n\r\n    console.log('Executing api request');\r\n    fetch('/api/values/10').then(function (response) {\n        return response.text();\n    }).then(function (text) {\n        serverTextDiv.innerText = text;\n    });\r\n\r\n    console.log('Finished iife execution.');\r\n\r\n    \r\n})();\r\n\r\nfunction clickMeExecuted() {\r\n    console.log('Button was clicked');\r\n}\n\n//# sourceURL=webpack:///./src/scripts/junk.js?");
 
 /***/ }),
 

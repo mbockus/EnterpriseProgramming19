@@ -21,7 +21,7 @@ namespace AzureExample.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return "server text to display";
         }
 
         // POST api/values
