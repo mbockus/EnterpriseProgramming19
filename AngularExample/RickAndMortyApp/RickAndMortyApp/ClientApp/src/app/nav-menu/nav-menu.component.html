@@ -9,13 +9,16 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+            <a class="nav-link text-dark" [routerLink]='["/"]'>Search</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/counter"]'>Counter</a>
+            <a class="nav-link text-dark" [routerLink]='["/episodes"]'>Episodes</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/fetch-data"]'>Fetch data</a>
+            <a class="nav-link text-dark" [routerLink]='["/locations"]'>Locations</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/characters"]'>Characters</a>
           </li>
         </ul>
       </div>

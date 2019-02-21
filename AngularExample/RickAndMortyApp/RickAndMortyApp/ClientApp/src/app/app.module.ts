@@ -6,26 +6,31 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { CharacterComponent } from './character/character.component';
+import { CharacterRolodexComponent } from './character-rolodex/character-rolodex.component';
+import { LocationsComponent } from './locations/locations.component';
+import { EpisodesComponent } from './episodes/episodes.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    CharacterComponent,
+    CharacterRolodexComponent,
+    LocationsComponent,
+    EpisodesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: SearchComponent, pathMatch: 'full' },
+      { path: 'episodes', component: EpisodesComponent },
+      { path: 'locations', component: LocationsComponent },
+      { path: 'characters', component: CharacterRolodexComponent },
     ])
   ],
   providers: [],
