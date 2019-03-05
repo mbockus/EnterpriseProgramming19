@@ -11,6 +11,7 @@ import { CharacterRolodexComponent } from './character-rolodex/character-rolodex
 import { LocationsComponent } from './locations/locations.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { SearchComponent } from './search/search.component';
+import { CharacterDetailComponent } from './character-detail/character-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SearchComponent } from './search/search.component';
     CharacterRolodexComponent,
     LocationsComponent,
     EpisodesComponent,
-    SearchComponent
+    SearchComponent,
+    CharacterDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,6 +33,7 @@ import { SearchComponent } from './search/search.component';
       { path: 'episodes', component: EpisodesComponent },
       { path: 'locations', component: LocationsComponent },
       { path: 'characters', component: CharacterRolodexComponent },
+      { path: 'character/:id', component: CharacterDetailComponent },
     ])
   ],
   providers: [],

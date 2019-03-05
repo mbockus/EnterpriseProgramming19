@@ -1,2 +1,9 @@
-<app-character [name]="characterName" [isDead]="isCharacterDead" [imageUrl]="characterImageUrl"></app-character>
-<app-character [species]="'Human'" [name]="'Rick'" [isDead]="true" [imageUrl]="'https://rickandmortyapi.com/api/character/avatar/1.jpeg'"></app-character>
+<div class="row">
+  <div *ngFor="let character of characterResults.results" class="col-3">
+    <app-character [character]="character"></app-character>
+  </div>
+</div>
+<div>
+  <button class="btn-primary" (click)="previousPage()">Previous</button>
+  <button class="btn-primary" (click)="nextPage()">Next</button>
+</div>

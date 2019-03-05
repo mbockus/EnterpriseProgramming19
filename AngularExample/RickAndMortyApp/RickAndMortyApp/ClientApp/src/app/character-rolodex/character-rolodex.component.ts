@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CharacterSearchResults } from '../character-search-results';
+import { CharacterService } from '../character.service';
 
 @Component({
   selector: 'app-character-rolodex',
@@ -7,13 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharacterRolodexComponent implements OnInit {
 
-  characterName: string = 'Morty Smith';
-  characterImageUrl: string = 'https://rickandmortyapi.com/api/character/avatar/2.jpeg';
-  isCharacterDead: boolean = false;
+  private characterResults: CharacterSearchResults;
+  private currentPage: number = 1;
 
-  constructor() { }
+  constructor(private service : CharacterService) { }
 
   ngOnInit() {
+    this.service.getCharacters(this.currentPage).subscribe((data: CharacterSearchResults) => this.characterResults = data)
   }
+
+  refreshResults() {
+    this.service.getCharacters(this.currentPage).subscribe((data: CharacterSearchResults) => this.characterResults = data)
+  }
+
+  nextPage() {
+    this.currentPage = this.currentPage + 1;
+    this.refreshResults();
+  }
+
+  previousPage() {
+    this.currentPage--;
+    this.refreshResults();
+  }
+
 
 }

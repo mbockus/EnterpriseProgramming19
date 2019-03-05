@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit {
   searchString: string;
   isAlive: boolean;
   searchResults: Character[];
+  loading: boolean = false;
 
   constructor(private characterService : CharacterService) { }
 
@@ -20,8 +21,9 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
+    this.loading = true;
     this.characterService.searchForCharacters(this.searchString, this.isAlive)
-      .subscribe((data: CharacterSearchResults) => this.searchResults = data.results);
+      .subscribe((data: CharacterSearchResults) => { this.searchResults = data.results; this.loading = false; } );
   }
 
 }

@@ -9,4 +9,18 @@
   </div>
   <button type="button" (click)="search()" class="btn btn-primary">Search</button>
 </form>
-{{ searchResults | json}}
+<div *ngIf="loading">
+  Loading... 
+</div>
+<div *ngIf="searchResults && !loading">
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+    </tr>
+    <tr *ngFor="let character of searchResults">
+      <td><a [routerLink]='["/character", character.id]'>{{character.name}}</a></td>
+      <td><img [src]="character.image" /></td>
+    </tr>
+  </table>
+</div>

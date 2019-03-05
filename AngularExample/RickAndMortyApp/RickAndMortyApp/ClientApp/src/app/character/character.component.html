@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{imageUrl}}" alt="Card image cap">
+  <img class="card-img-top" [src]="character.image" alt="Card image cap">
   <div class="card-body">
-    <p class="card-text">{{name}} - {{isDead ? 'Dead' : 'Alive'}} - {{species}}</p>
+    <p class="card-text">{{character.name}} - {{character.status}} - {{character.species}}</p>
   </div>
 </div>
