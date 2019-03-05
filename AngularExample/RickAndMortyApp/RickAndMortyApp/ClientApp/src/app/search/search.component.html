@@ -1,3 +1,12 @@
-<p>
-  search works!
-</p>
+<form>
+  <div class="form-group">
+    <label for="searchString">Character Name</label>
+    <input name="searchString" type="text" [(ngModel)]="searchString" class="form-control" id="searchString" placeholder="Search criteria...">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" name="isAlive" [(ngModel)]="isAlive" class="form-check-input" id="isAlive">
+    <label class="form-check-label" for="isAlive">Alive?</label>
+  </div>
+  <button type="button" (click)="search()" class="btn btn-primary">Search</button>
+</form>
+{{ searchResults | json}}

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CharacterService } from '../character.service';
+import { CharacterSearchResults } from '../character-search-results';
+import { Character } from '../character';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  searchString: string;
+  isAlive: boolean;
+  searchResults: Character[];
+
+  constructor(private characterService : CharacterService) { }
 
   ngOnInit() {
+  }
+
+  search() {
+    this.characterService.searchForCharacters(this.searchString, this.isAlive)
+      .subscribe((data: CharacterSearchResults) => this.searchResults = data.results);
   }
 
 }
