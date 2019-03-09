@@ -12,6 +12,8 @@ import { LocationsComponent } from './locations/locations.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { SearchComponent } from './search/search.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
+import { WubbaPipe } from './wubba.pipe';
+import { SurpriseWubbaDirective } from './surprise-wubba.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CharacterDetailComponent } from './character-detail/character-detail.co
     LocationsComponent,
     EpisodesComponent,
     SearchComponent,
-    CharacterDetailComponent
+    CharacterDetailComponent,
+    WubbaPipe,
+    SurpriseWubbaDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

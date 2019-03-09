@@ -14,16 +14,20 @@ export class SearchComponent implements OnInit {
   isAlive: boolean;
   searchResults: Character[];
   loading: boolean = false;
+  searchFailed: boolean = false;
 
-  constructor(private characterService : CharacterService) { }
+  constructor(private characterService: CharacterService) { }
 
   ngOnInit() {
   }
 
   search() {
     this.loading = true;
+    this.searchFailed = false;
     this.characterService.searchForCharacters(this.searchString, this.isAlive)
-      .subscribe((data: CharacterSearchResults) => { this.searchResults = data.results; this.loading = false; } );
+      .subscribe(
+        (data: CharacterSearchResults) => { this.searchResults = data.results; this.loading = false; },
+        (error: any) => { console.log(error); this.searchFailed = true; this.loading = false; });
   }
 
 }
