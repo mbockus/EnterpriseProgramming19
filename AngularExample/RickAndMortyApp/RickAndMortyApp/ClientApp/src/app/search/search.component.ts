@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../character.service';
 import { CharacterSearchResults } from '../character-search-results';
 import { Character } from '../character';
+import { CanComponentDeactivate } from '../is-saved.guard';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, CanComponentDeactivate {
 
   searchString: string;
   isAlive: boolean;
@@ -30,4 +31,7 @@ export class SearchComponent implements OnInit {
         (error: any) => { console.log(error); this.searchFailed = true; this.loading = false; });
   }
 
+  canDeactivate(): boolean {
+    return confirm('Are you sure you want to leave?');
+  }
 }

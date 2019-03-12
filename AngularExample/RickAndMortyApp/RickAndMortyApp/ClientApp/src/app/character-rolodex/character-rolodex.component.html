@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="characterResults && characterResults.results">
   <div *ngFor="let character of characterResults.results" class="col-3">
     <app-character [character]="character"></app-character>
   </div>

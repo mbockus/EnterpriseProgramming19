@@ -14,6 +14,8 @@ import { SearchComponent } from './search/search.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { WubbaPipe } from './wubba.pipe';
 import { SurpriseWubbaDirective } from './surprise-wubba.directive';
+import { AuthGuard } from './auth.guard';
+import { IsSavedGuard } from './is-saved.guard';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,10 @@ import { SurpriseWubbaDirective } from './surprise-wubba.directive';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: SearchComponent, pathMatch: 'full' },
+      { path: '', component: SearchComponent, canDeactivate: [IsSavedGuard],  pathMatch: 'full' },
       { path: 'episodes', component: EpisodesComponent },
       { path: 'locations', component: LocationsComponent },
-      { path: 'characters', component: CharacterRolodexComponent },
+      { path: 'characters', canActivate: [AuthGuard], component: CharacterRolodexComponent },
       { path: 'character/:id', component: CharacterDetailComponent },
     ])
   ],
