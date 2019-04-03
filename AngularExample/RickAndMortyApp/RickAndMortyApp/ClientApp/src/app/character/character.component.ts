@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Character } from '../character';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-character',

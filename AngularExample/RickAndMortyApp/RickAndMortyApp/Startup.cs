@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RickAndMortyApp.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace RickAndMortyApp
@@ -22,6 +23,8 @@ namespace RickAndMortyApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSingleton<ICharacterService>(new CharacterService());
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
