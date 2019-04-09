@@ -1,0 +1,24 @@
+<form>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="newCharacter.name">
+  </div>
+  <div class="form-group">
+    <label for="createdDate">Created Date</label>
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" [(ngModel)]="createdDate" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="createdTime">Created Time</label>
+    <ngb-timepicker id="createdTime" [(ngModel)]="createdTime" name="timePicker"></ngb-timepicker>
+  </div>
+  <button type="submit" (click)="createCharacter()" class="btn btn-primary">Submit</button>
+</form>
+{{ createdTime | json }}
+{{ createdDate | json }}
+{{ newCharacter | json }}

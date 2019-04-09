@@ -1,4 +1,5 @@
 ﻿using RickAndMortyApp.Controllers;
+using RickAndMortyApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

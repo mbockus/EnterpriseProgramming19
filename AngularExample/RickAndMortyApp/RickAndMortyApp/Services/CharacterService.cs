@@ -1,4 +1,5 @@
 ﻿using RickAndMortyApp.Controllers;
+using RickAndMortyApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,47 +9,45 @@ namespace RickAndMortyApp.Services
 {
     public class CharacterService : ICharacterService
     {
-        private Dictionary<int, Character> characters = new Dictionary<int, Character>();
+        private RickAndMortyContext _context;
 
-        public CharacterService()
+        public CharacterService(RickAndMortyContext context)
         {
-            characters.Add(1, new Character()
-            {
-                Id = 1,
-                Name = "Rick",
-                CreatedDate = DateTime.UtcNow
-            });
-
-            characters.Add(2, new Character()
-            {
-                Id = 2,
-                Name = "Morty",
-                CreatedDate = DateTime.UtcNow
-            });
+            _context = context;
         }
+
         public void CreateCharacter(Character character)
         {
-            characters.Add(character.Id, character);
+            _context.Characters.Add(character);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Character> SelectAll()
         {
-            return characters.Values;
+            return _context.Characters.ToList();
         }
 
         public Character SelectCharacter(int id)
         {
-            return characters.GetValueOrDefault(id);
+            return _context.Characters.Where(character => id == character.Id).FirstOrDefault();
         }
 
         public void DeleteCharacter(int id)
         {
-            characters.Remove(id);
+            var characterToDelete = SelectCharacter(id);
+            if(characterToDelete != null)
+            {
+                _context.Characters.Remove(characterToDelete);
+                _context.SaveChanges();
+            }
         }
 
         public void UpdateCharacter(int id, Character character)
         {
-            characters[id]=character;
+            var characterToUpdate = SelectCharacter(id);
+            characterToUpdate.Name = character.Name;
+            characterToUpdate.CreatedDate = character.CreatedDate;
+            _context.SaveChanges();
         }
     }
 }

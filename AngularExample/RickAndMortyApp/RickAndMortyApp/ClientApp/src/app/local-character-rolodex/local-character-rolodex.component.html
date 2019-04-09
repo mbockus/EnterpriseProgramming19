@@ -1,0 +1,12 @@
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Created Date</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let character of localCharacters">
+    <td>{{character.name}}</td>
+    <td>{{character.createdDate}}</td>
+    <td><button (click)="delete(character.id)" class="btn btn-danger"><i class="fas fa-check"></i>Delete</button></td>
+  </tr>
+</table>

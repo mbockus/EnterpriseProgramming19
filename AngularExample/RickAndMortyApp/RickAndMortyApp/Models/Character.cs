@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RickAndMortyApp.Controllers
+namespace RickAndMortyApp.Models
 {
     public class Character
     {

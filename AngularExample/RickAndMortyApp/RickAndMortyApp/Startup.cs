@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RickAndMortyApp.Models;
 using RickAndMortyApp.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -24,7 +26,11 @@ namespace RickAndMortyApp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<ICharacterService>(new CharacterService());
+            services.AddScoped<ICharacterService, CharacterService>();
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=RickAndMorty;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<RickAndMortyContext>
+                (options => options.UseSqlServer(connection));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

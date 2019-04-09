@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CharacterSearchResults } from './character-search-results';
 import { Observable } from 'rxjs';
 import { Character } from './character';
+import { LocalCharacter } from './local-character';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,17 @@ export class CharacterService {
   getCharacters(page: number): Observable<CharacterSearchResults> {
     var endpoint = `${this.apiUrl}/character/?page=${page}`;
     return this.http.get<CharacterSearchResults>(endpoint);
+  }
+
+  createCharacter(character: LocalCharacter): Observable<LocalCharacter> {
+    return this.http.post<LocalCharacter>('api/character', character);
+  }
+
+  getLocalCharacters(): Observable<LocalCharacter[]> {
+    return this.http.get<LocalCharacter[]>('api/character');
+  }
+
+  deleteLocalCharacter(characterId : number): Observable<LocalCharacter> {
+    return this.http.delete<LocalCharacter>(`api/character/${characterId}`);
   }
 }

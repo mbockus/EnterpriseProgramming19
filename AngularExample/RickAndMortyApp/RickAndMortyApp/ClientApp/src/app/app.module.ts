@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -16,6 +17,8 @@ import { WubbaPipe } from './wubba.pipe';
 import { SurpriseWubbaDirective } from './surprise-wubba.directive';
 import { AuthGuard } from './auth.guard';
 import { IsSavedGuard } from './is-saved.guard';
+import { CreateCharacterComponent } from './create-character/create-character.component';
+import { LocalCharacterRolodexComponent } from './local-character-rolodex/local-character-rolodex.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { IsSavedGuard } from './is-saved.guard';
     SearchComponent,
     CharacterDetailComponent,
     WubbaPipe,
-    SurpriseWubbaDirective
+    SurpriseWubbaDirective,
+    CreateCharacterComponent,
+    LocalCharacterRolodexComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,8 +44,11 @@ import { IsSavedGuard } from './is-saved.guard';
       { path: 'episodes', component: EpisodesComponent },
       { path: 'locations', component: LocationsComponent },
       { path: 'characters', canActivate: [AuthGuard], component: CharacterRolodexComponent },
+      { path: 'localcharacters', component: LocalCharacterRolodexComponent },
+      { path: 'character/create', component: CreateCharacterComponent },
       { path: 'character/:id', component: CharacterDetailComponent },
-    ])
+    ]),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
