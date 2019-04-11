@@ -41,6 +41,10 @@ export class CharacterService {
     return this.http.get<LocalCharacter[]>('api/character');
   }
 
+  getLocalCharacter(characterId : number): Observable<LocalCharacter> {
+    return this.http.get<LocalCharacter>(`api/character/${characterId}`);
+  }
+
   deleteLocalCharacter(characterId : number): Observable<LocalCharacter> {
     return this.http.delete<LocalCharacter>(`api/character/${characterId}`);
   }

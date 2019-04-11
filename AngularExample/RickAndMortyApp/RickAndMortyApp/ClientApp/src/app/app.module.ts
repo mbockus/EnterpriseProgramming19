@@ -46,6 +46,7 @@ import { LocalCharacterRolodexComponent } from './local-character-rolodex/local-
       { path: 'characters', canActivate: [AuthGuard], component: CharacterRolodexComponent },
       { path: 'localcharacters', component: LocalCharacterRolodexComponent },
       { path: 'character/create', component: CreateCharacterComponent },
+      { path: 'character/update/:id', component: CreateCharacterComponent },
       { path: 'character/:id', component: CharacterDetailComponent },
     ]),
     NgbModule

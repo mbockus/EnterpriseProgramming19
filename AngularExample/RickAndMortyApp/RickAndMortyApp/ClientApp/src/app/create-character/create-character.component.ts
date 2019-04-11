@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LocalCharacter } from '../local-character';
 import * as moment from 'moment';
 import { CharacterService } from '../character.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-character',
@@ -10,17 +12,42 @@ import { CharacterService } from '../character.service';
 })
 export class CreateCharacterComponent implements OnInit {
 
-  createdTime: any;
-  createdDate: any;
+  createdTime: any = {
+    "hour": 0,
+    "minute": 0,
+    "seconds": 0
+  };
+  createdDate: any = {
+    "year": 2019,
+    "month": 4,
+    "day": 11
+  };
+
   newCharacter: LocalCharacter = {
     id: 0,
     name: "",
     createdDate: new Date()
   };
 
-  constructor(private characterService: CharacterService) { }
+
+  constructor(private route: ActivatedRoute,
+    private characterService: CharacterService) { }
 
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.characterService.getLocalCharacter(Number(params.get('id'))))
+    ).subscribe((data: LocalCharacter) => this.populateForm(data));
+  }
+
+  populateForm(character: LocalCharacter) {
+    this.newCharacter = character;
+    var momentInstance = moment.utc(this.newCharacter.createdDate).local();
+    this.createdTime.hour = momentInstance.hour();
+    this.createdTime.minute = momentInstance.minute();
+    this.createdDate.month = momentInstance.month();
+    this.createdDate.day = momentInstance.day();
+    this.createdDate.year = momentInstance.year();
   }
 
   createCharacter() {

@@ -28,7 +28,7 @@ namespace RickAndMortyApp
 
             services.AddScoped<ICharacterService, CharacterService>();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=RickAndMorty;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = Configuration["RickAndMortyConnectionString"];
             services.AddDbContext<RickAndMortyContext>
                 (options => options.UseSqlServer(connection));
 
