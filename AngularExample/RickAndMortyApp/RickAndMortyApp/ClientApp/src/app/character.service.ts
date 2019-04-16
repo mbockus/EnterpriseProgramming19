@@ -37,6 +37,10 @@ export class CharacterService {
     return this.http.post<LocalCharacter>('api/character', character);
   }
 
+  updateCharacter(character: LocalCharacter): Observable<LocalCharacter> {
+    return this.http.put<LocalCharacter>(`api/character/${character.id}`, character);
+  }
+
   getLocalCharacters(): Observable<LocalCharacter[]> {
     return this.http.get<LocalCharacter[]>('api/character');
   }

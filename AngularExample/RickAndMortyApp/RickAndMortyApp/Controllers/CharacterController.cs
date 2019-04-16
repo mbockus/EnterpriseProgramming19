@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RickAndMortyApp.Models;
 using RickAndMortyApp.Services;
@@ -10,6 +11,7 @@ using RickAndMortyApp.Services;
 
 namespace RickAndMortyApp.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CharacterController : Controller
     {
@@ -25,6 +27,15 @@ namespace RickAndMortyApp.Controllers
         public IActionResult Get()
         {
             var characters = _characterService.SelectAll();
+            return Ok(characters);
+        }
+
+        // GET: api/<controller>
+        [HttpGet("traits")]
+        public IActionResult GetCharactersWithTraits([FromQuery]string traits)
+        {
+            var traitList = traits.Split(',');
+            var characters = _characterService.SelectAllWithTraits(traitList);
             return Ok(characters);
         }
 

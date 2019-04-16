@@ -34,28 +34,40 @@ export class CreateCharacterComponent implements OnInit {
     private characterService: CharacterService) { }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.characterService.getLocalCharacter(Number(params.get('id'))))
-    ).subscribe((data: LocalCharacter) => this.populateForm(data));
+    const routeParams = this.route.snapshot.params;
+    if (routeParams.id) {
+      this.route.paramMap.pipe(
+        switchMap((params: ParamMap) =>
+          this.characterService.getLocalCharacter(Number(params.get('id'))))
+        ).subscribe((data: LocalCharacter) => this.populateForm(data));
+    }
   }
 
   populateForm(character: LocalCharacter) {
     this.newCharacter = character;
     var momentInstance = moment.utc(this.newCharacter.createdDate).local();
-    this.createdTime.hour = momentInstance.hour();
-    this.createdTime.minute = momentInstance.minute();
-    this.createdDate.month = momentInstance.month();
-    this.createdDate.day = momentInstance.day();
-    this.createdDate.year = momentInstance.year();
+    this.createdTime = {
+      "hour": momentInstance.hour(),
+      "minute": momentInstance.minute()
+    }
+    this.createdDate = {
+      "month": momentInstance.month(),
+      "day": momentInstance.day(),
+      "year": momentInstance.year()
+    }
   }
 
   createCharacter() {
-    var selectedCreateDate = new Date(this.createdDate.year, this.createdDate.month-1, this.createdDate.day, this.createdTime.hour, this.createdTime.minute, 0, 0);
-    var utcDate = moment(selectedCreateDate).utc();
-    this.newCharacter.createdDate = utcDate.toDate();
+    if (this.newCharacter.id) {
+      this.characterService.updateCharacter(this.newCharacter).subscribe(() => console.log('yay'));
+    } else {
+      var selectedCreateDate = new Date(this.createdDate.year, this.createdDate.month - 1, this.createdDate.day, this.createdTime.hour, this.createdTime.minute, 0, 0);
+      var utcDate = moment(selectedCreateDate).utc();
+      this.newCharacter.createdDate = utcDate.toDate();
 
-    this.characterService.createCharacter(this.newCharacter).subscribe(() => console.log('yay') );
+      this.characterService.createCharacter(this.newCharacter).subscribe(() => console.log('yay'));
+    }
+    
 
   }
 

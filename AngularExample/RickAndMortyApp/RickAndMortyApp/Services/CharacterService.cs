@@ -49,5 +49,11 @@ namespace RickAndMortyApp.Services
             characterToUpdate.CreatedDate = character.CreatedDate;
             _context.SaveChanges();
         }
+
+        public IEnumerable<Character> SelectAllWithTraits(string[] traitList)
+        {
+            var characters = _context.Characters.Where(character => traitList.All(trait => character.CharacterTraits.Any(charTrait => charTrait.Trait == trait)));
+            return characters;
+        }
     }
 }

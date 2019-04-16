@@ -14,5 +14,6 @@ namespace RickAndMortyApp.Services
         Character SelectCharacter(int id);
         void DeleteCharacter(int id);
         void UpdateCharacter(int id, Character character);
+        IEnumerable<Character> SelectAllWithTraits(string[] traitList);
     }
 }

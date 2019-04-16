@@ -17,7 +17,7 @@
     <label for="createdTime">Created Time</label>
     <ngb-timepicker id="createdTime" [(ngModel)]="createdTime" name="timePicker"></ngb-timepicker>
   </div>
-  <button type="submit" (click)="createCharacter()" class="btn btn-primary">Submit</button>
+  <button type="submit" (click)="createCharacter()" class="btn btn-primary">{{ newCharacter.id ? 'Update' : 'Create'}}</button>
 </form>
 {{ createdTime | json }}
 {{ createdDate | json }}
