@@ -19,6 +19,8 @@ import { AuthGuard } from './auth.guard';
 import { IsSavedGuard } from './is-saved.guard';
 import { CreateCharacterComponent } from './create-character/create-character.component';
 import { LocalCharacterRolodexComponent } from './local-character-rolodex/local-character-rolodex.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { LocalCharacterRolodexComponent } from './local-character-rolodex/local-
     WubbaPipe,
     SurpriseWubbaDirective,
     CreateCharacterComponent,
-    LocalCharacterRolodexComponent
+    LocalCharacterRolodexComponent,
+    UserCreateComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,6 +52,8 @@ import { LocalCharacterRolodexComponent } from './local-character-rolodex/local-
       { path: 'character/create', component: CreateCharacterComponent },
       { path: 'character/update/:id', component: CreateCharacterComponent },
       { path: 'character/:id', component: CharacterDetailComponent },
+      { path: 'user/create', component: UserCreateComponent },
+      { path: 'user/login', component: UserLoginComponent },
     ]),
     NgbModule
   ],
