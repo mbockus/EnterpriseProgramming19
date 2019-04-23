@@ -9,5 +9,6 @@ namespace RickAndMortyApp.Models
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
         public List<CharacterTrait> CharacterTraits { get; set; }
+        public string UserName { get; set; }
     }
 }

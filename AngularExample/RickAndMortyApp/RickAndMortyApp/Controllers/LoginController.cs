@@ -44,10 +44,7 @@ namespace RickAndMortyApp.Controllers
         [HttpPost()]
         public async Task<IActionResult> AuthenticateUserAsync([FromBody]RickAndMortyUserLogin loginCreds)
         {
-            var result = await _signInManager.CheckPasswordSignInAsync(new RickAndMortyUser()
-            {
-                UserName = loginCreds.userName
-            }, loginCreds.password, false);
+            var result = await _signInManager.PasswordSignInAsync(loginCreds.userName, loginCreds.password, true, false);
             return Ok();
         }
         

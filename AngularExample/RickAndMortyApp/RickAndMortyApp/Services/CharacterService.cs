@@ -16,15 +16,16 @@ namespace RickAndMortyApp.Services
             _context = context;
         }
 
-        public void CreateCharacter(Character character)
+        public void CreateCharacter(string userName, Character character)
         {
+            character.UserName = userName;
             _context.Characters.Add(character);
             _context.SaveChanges();
         }
 
-        public IEnumerable<Character> SelectAll()
+        public IEnumerable<Character> SelectAll(string userName)
         {
-            return _context.Characters.ToList();
+            return _context.Characters.Where(ch => ch.UserName == userName).ToList();
         }
 
         public Character SelectCharacter(int id)
@@ -32,19 +33,27 @@ namespace RickAndMortyApp.Services
             return _context.Characters.Where(character => id == character.Id).FirstOrDefault();
         }
 
-        public void DeleteCharacter(int id)
+        public void DeleteCharacter(string userName, int id)
         {
             var characterToDelete = SelectCharacter(id);
             if(characterToDelete != null)
             {
+                if(characterToDelete.UserName != userName)
+                {
+                    throw new Exception();
+                }
                 _context.Characters.Remove(characterToDelete);
                 _context.SaveChanges();
             }
         }
 
-        public void UpdateCharacter(int id, Character character)
+        public void UpdateCharacter(string userName, int id, Character character)
         {
             var characterToUpdate = SelectCharacter(id);
+            if(characterToUpdate.UserName != userName)
+            {
+                throw new Exception();
+            }
             characterToUpdate.Name = character.Name;
             characterToUpdate.CreatedDate = character.CreatedDate;
             _context.SaveChanges();

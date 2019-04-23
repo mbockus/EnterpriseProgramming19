@@ -9,11 +9,11 @@ namespace RickAndMortyApp.Services
 {
     public interface ICharacterService
     {
-        void CreateCharacter(Character character);
-        IEnumerable<Character> SelectAll();
+        void CreateCharacter(string userName, Character character);
+        IEnumerable<Character> SelectAll(string userName);
         Character SelectCharacter(int id);
-        void DeleteCharacter(int id);
-        void UpdateCharacter(int id, Character character);
+        void DeleteCharacter(string userName, int id);
+        void UpdateCharacter(string userName, int id, Character character);
         IEnumerable<Character> SelectAllWithTraits(string[] traitList);
     }
 }

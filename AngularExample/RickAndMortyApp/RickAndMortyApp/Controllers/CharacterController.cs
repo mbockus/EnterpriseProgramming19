@@ -26,7 +26,8 @@ namespace RickAndMortyApp.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var characters = _characterService.SelectAll();
+            var userName = this.User.Identity.Name;
+            var characters = _characterService.SelectAll(userName);
             return Ok(characters);
         }
 
@@ -55,21 +56,36 @@ namespace RickAndMortyApp.Controllers
         [HttpPost]
         public void Post([FromBody]Character value)
         {
-            _characterService.CreateCharacter(value);
+            var userName = this.User.Identity.Name;
+            _characterService.CreateCharacter(userName, value);
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Character value)
+        public IActionResult Put(int id, [FromBody]Character value)
         {
-            _characterService.UpdateCharacter(id, value);
+            try { 
+                var userName = this.User.Identity.Name;
+                _characterService.UpdateCharacter(userName, id, value);
+                return Ok();
+            } catch(Exception)
+            {
+                return Unauthorized();
+            }
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _characterService.DeleteCharacter(id);
+            try { 
+                var userName = this.User.Identity.Name;
+                _characterService.DeleteCharacter(userName, id);
+                return Ok();
+            } catch(Exception e)
+            {
+                return Unauthorized();
+            }
         }
     }
 }

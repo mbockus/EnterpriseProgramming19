@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { CreateCharacterComponent } from './create-character/create-character.co
 import { LocalCharacterRolodexComponent } from './local-character-rolodex/local-character-rolodex.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { AuthInterceptor } from './auth-service.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,14 @@ import { UserLoginComponent } from './user-login/user-login.component';
     ]),
     NgbModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useFactory: function (router: Router) {
+      return new AuthInterceptor(router);
+    },
+    multi: true,
+    deps: [Router]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RickAndMortyApp.Models;
 using RickAndMortyApp.Services;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Threading.Tasks;
 
 namespace RickAndMortyApp
 {
@@ -50,7 +51,25 @@ namespace RickAndMortyApp
                 config.Password.RequireDigit = true;
                 config.Password.RequiredLength = 8;
                 config.Password.RequireUppercase = true;
+                
             }).AddEntityFrameworkStores<RickAndMortyContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = System.TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/user/login";
+                options.AccessDeniedPath = "/user/login";
+                options.SlidingExpiration = true;
+
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
